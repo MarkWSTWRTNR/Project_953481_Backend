@@ -2,7 +2,7 @@ import string
 import numpy as np
 import pandas as pd
 from rank_bm25 import BM25Okapi
-
+import CheckSpell as ac
 
 def searchByTitle(query):
     data = pd.read_csv('src/resource/anime.csv')
@@ -19,7 +19,7 @@ def searchByTitle(query):
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
     # Create txt file
-    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
+    ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()
@@ -28,7 +28,12 @@ def searchByTitle(query):
             relevent_document += 1
     rank = np.argsort(doc_scores)[::-1]
 
-    return data.iloc[rank[:relevent_document]]
+    if relevent_document > 10:
+        return data.iloc[rank[:10]]
+    elif 10 >= relevent_document > 0:
+        return data.iloc[rank[:relevent_document]]
+    else:
+        return ac.title_auto_correct(query)
 
 def searchByDescription(query):
     data = pd.read_csv('src/resource/anime.csv')
@@ -45,7 +50,7 @@ def searchByDescription(query):
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
     # Create txt file
-    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
+    ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()
@@ -54,7 +59,12 @@ def searchByDescription(query):
             relevent_document += 1
     rank = np.argsort(doc_scores)[::-1]
 
-    return data.iloc[rank[:relevent_document]]
+    if relevent_document > 10:
+        return data.iloc[rank[:10]]
+    elif 10 >= relevent_document > 0:
+        return data.iloc[rank[:relevent_document]]
+    else:
+        return ac.description_auto_correct(query)
     # delete special symbols +-*/!@#$
 
 
