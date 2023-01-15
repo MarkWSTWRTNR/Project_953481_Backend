@@ -183,5 +183,19 @@ def predict(user_df, top_k, anime, rating):
     topk_idx = np.argsort(preds)[::-1][:top_k]
 
     recommend_df = pred_df.iloc[topk_idx].reset_index(drop=True)
-
+#
+#     print('---------- Recommend ----------')
+#     for i, row in recommend_df.iterrows():
+#         print(f'{i + 1}:{row["title"]}')
+#
+#     print('---------- Rated ----------')
+#     user_df = user_df.merge(anime, left_on='anime_id', right_on='mal_id', how='inner')
+#     for i, row in user_df.sort_values('rating', ascending=False).iterrows():
+#         print(f'rating:{row["rating"]}:{row["title"]}')
+#
     return recommend_df
+#
+# user_id = 0
+# user_df = rating.copy().loc[rating['user_id'] == user_id]
+# user_df = make_user_feature(user_df)
+# predict(user_df, 10, anime, rating)
