@@ -17,10 +17,16 @@ def animeSearch():
     if isinstance(result, pd.DataFrame):
         resultTranpose = result.T
         jsonResult = resultTranpose.to_json()
-        return jsonResult
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     else:
-        json_object = {'response': '404 not found', 'similar word': result}
-        return json_object
+        jsonResult = {'response': '404', 'similar_word': result}
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 
 # jsonResult = result.to_json()
@@ -38,13 +44,16 @@ def animedesSearch():
     if isinstance(result, pd.DataFrame):
         resultTranpose = result.T
         jsonResult = resultTranpose.to_json()
-        return jsonResult
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     else:
-        json_object = {'response': '404 not found', 'similar word': result}
-        return json_object
-    # jsonResult = result.to_json()
-    # response = make_response(jsonResult)
-    # return response
+        jsonResult = {'response': '404', 'similar_word': result}
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 @app.route('/suggestion', methods=['GET'])
 def Suggestion():

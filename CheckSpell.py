@@ -1,4 +1,4 @@
-from spellchecker import SpellChecker as spell, SpellChecker
+from spellchecker import SpellChecker
 
 
 # Get all the text from a list that contains nested lists
@@ -14,14 +14,14 @@ def get_text(lst):
 
 def trainTitleTextFile(arr):
     with open('src/resource/title.txt', 'w') as f:
-        # Iterate through the array and write each element to the file
+        # เขียนซ้ำๆผ่านarrayเเล้วลงในไฟล์
         for item in arr:
             f.write(str(item) + '\n')
 
 
 def trainDescriptionTextFile(arr):
     with open('src/resource/description.txt', 'w') as f:
-        # Iterate through the array and write each element to the file
+        # เขียนซ้ำๆผ่านarrayเเล้วลงในไฟล์
         for item in arr:
             f.write(str(item) + '\n')
 
