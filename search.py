@@ -13,13 +13,10 @@ def searchByTitle(query):
         cleaned_doc = remove_puncts(doc, string)
         cleaned_corpus.append(cleaned_doc)
     tokenized_clean_corpus = []
-    # Ex. {[dragon ball]} -> {[dragon], [ball]}
     for doc in cleaned_corpus:
         doc = doc.split()
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
-    # Create txt file
-    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()
@@ -44,13 +41,10 @@ def searchByDescription(query):
         cleaned_doc = remove_puncts(doc, string)
         cleaned_corpus.append(cleaned_doc)
     tokenized_clean_corpus = []
-    # Ex. {[dragon ball]} -> {[dragon], [ball]}
     for doc in cleaned_corpus:
         doc = doc.split()
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
-    # Create txt file
-    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()
@@ -65,8 +59,8 @@ def searchByDescription(query):
         return data.iloc[rank[:relevent_document]]
     else:
         return ac.description_auto_correct(query)
-    # delete special symbols +-*/!@#$
 
 
+# delete special symbols +-*/!@#$
 def remove_puncts(input_string, string):
     return str(input_string).translate(str.maketrans('', '', string.punctuation)).lower()
