@@ -19,7 +19,7 @@ def searchByTitle(query):
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
     # Create txt file
-    ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
+    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()
@@ -50,7 +50,7 @@ def searchByDescription(query):
         tokenized_clean_corpus.append(doc)
     bm25 = BM25Okapi(tokenized_clean_corpus)
     # Create txt file
-    ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
+    # ac.trainTitleTextFile(ac.get_text(tokenized_clean_corpus))
     relevent_document = 0
     tokenized_query = remove_puncts(query, string).split(" ")
     doc_scores = bm25.get_scores(tokenized_query).tolist()

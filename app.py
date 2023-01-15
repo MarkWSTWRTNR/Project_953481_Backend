@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request
+from flask import Flask, request, make_response
 from flask_cors import CORS
 
 import search as search
@@ -16,10 +16,16 @@ def animeSearch():
     if isinstance(result, pd.DataFrame):
         resultTranpose = result.T
         jsonResult = resultTranpose.to_json()
-        return jsonResult
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     else:
-        json_object = {'response': '404 not found', 'similar word': result}
-        return json_object
+        jsonResult = {'response': '404', 'similar': result}
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 
 # jsonResult = result.to_json()
@@ -37,13 +43,16 @@ def animedesSearch():
     if isinstance(result, pd.DataFrame):
         resultTranpose = result.T
         jsonResult = resultTranpose.to_json()
-        return jsonResult
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     else:
-        json_object = {'response': '404 not found', 'similar word': result}
-        return json_object
-    # jsonResult = result.to_json()
-    # response = make_response(jsonResult)
-    # return response
+        jsonResult = {'response': '404', 'similar': result}
+        response = make_response(jsonResult)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 
 if __name__ == '__main__':
