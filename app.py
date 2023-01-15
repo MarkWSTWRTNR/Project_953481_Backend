@@ -21,7 +21,7 @@ def animeSearch():
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     else:
-        jsonResult = {'response': '404', 'similar': result}
+        jsonResult = {'response': '404', 'similar_word': result}
         response = make_response(jsonResult)
         response.headers['Access-Control-Allow-Origin'] = '*'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
@@ -48,7 +48,7 @@ def animedesSearch():
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     else:
-        jsonResult = {'response': '404', 'similar': result}
+        jsonResult = {'response': '404', 'similar_word': result}
         response = make_response(jsonResult)
         response.headers['Access-Control-Allow-Origin'] = '*'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
